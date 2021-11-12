@@ -6,67 +6,11 @@ O kubernetes é composto por diferentes componentes que permitem com que ele sej
 
 ## Workload
 
-
-É a representação de uma aplicação rodando no Kubernetes. Sendo sua aplicação um único componente, ou o agrupamento de vários deles, através da criação e gerenciamento de [Pods](#pod)
-Para facilitar a vida do desenvolvedor que precisará gerenciar os diversos [Pods](#pod) de um Workload, existem diferentes recursos que facilitam esse processo:
-
-### Deployment
-
-Um deployment é responsável por prover de maneira declarativa, atualizações para [Pods](#pod) e [ReplicaSet](#replica-set).
-
-Foi meio difícil de entender isso, mas é a representação de um "desejo" de mudança. Ou seja, sempre que eu precisar realizar algum tipo de interação com o meu Cluster de forma declarativa, eu uso um deployment para isso.
-
-Parece confuso, mas é mais simples do que parece. Imagine o cenário de que precisaremos subir um servidor [nginx](https://nginx.com) no nosso workload [Workload](#workload). Nos criamos um deployment que descreve como essa mudança de estado será realizada. Com o deployment, é possível dizer quantos Pods precisarão ser criados, quais dados serao utilizados para identificá-los no cluster e etc.
-
-É possível ver mais definições do Deployment [aqui](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-
-### ReplicaSet
-
-É a configuração realizada com o propósito de sempre manter um número X de pods sendo executados por vez. É comumente utilizado para garantir disponibilidade em um cenário de falha. 
-
-De maneira declarativa, podemos definir:
-
-- Garantir que uma quantidade X de Pods estejam sempre sendo executados
-- Um seletor que identifica qual pod poderá ser usado no critério de seleção de novos pods
-- Um template utilizado no momento da criação de novos pods, com o objetivo de substituir um pod que falhou anteriormente.
-
-É importante notar que uma vez criado o ReplicaSet, não é possível alterar os pods diretamente. Em caso de atualizações de imagem, é necessário recriar matar cada um dos pods do ReplicaSet, a fim dele criar novos pods com a imagem atualizada.
-
-Para realizar essa atualização desejada de imagem, o segredo é utilizar [Deployments](#deployment) que implementam um ReplicaSet. Isso vai garantir que toda atualização de estado descrita pelo Deployment, impacte diretamente em todos os ReplicaSet e Pods abaixo dele.
-
-## Pod
-
-É um grupo de um ou mais containers representando uma aplicação no cluster Kubernetes. É a menor unidade de computação que é possível implantar em um Cluster. 
-
-Os containers de um Pod são sempre localizados no mesmo lugar, e compartilhando a mesma estratégia de agendamento, sendo executada em um contexto compartilhado. Ou seja, no mesmo [Workload](#workload). 
-
-## Nodes
-
-Nodes são as máquinas que serão responsáveis por executar [Workloads](#workload), sendo responsável por armazenar o estado de cada um de seus [Pods](#pod).
-
-Nodes podem ser máquinas virtuais ou físicas, depende muito da forma como o Cluster foi configurado.
-
-Cada node possui, pelo menos, três componentes Core do Kubernetes:
-
-### kubelet
-
-Um agent que é executado em cada Node de um determinado cluster. É ele quem garante que um container esteja sendo executado por um [Pod](#pod).
-
-Recebe um arquivo de configuração que através de vários mecanismos, garante que os containers declarados no arquivo esteja executando e esteja sadío. O kubelet não gerencia containers que não foram criados em um cluster Kubernetes.
-
-### kube-proxy
-
-É um proxy de rede que é executado em cada Node de um determinado cluster. Através desse componente é possível criar regras de rede permitindo comunicação dentro e fora do cluster.
-
-### Container Runtime
-
-Cada Node é responsável por ter um Software que permite a execução de containers.
-
-Um Node Kubernetes suporta diversas ferramentas, como: [Docker](https://docs.docker.com/engine/), [containerd](https://containerd.io/docs/), [cri-o](https://cri-o.io/#what-is-cri-o) e qualquer outra implementação da [Kubernetes CRI](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md) 
+É a representação de uma aplicação rodando no Kubernetes. Sendo sua aplicação um único componente, ou o agrupamento de vários deles, através da criação e gerenciamento de [Pods](./kubernetes_pods.md).
 
 ## Control Plane
 
-Esse componente é responsável por gerenciar os [Nodes](#nodes) no cluster Kubernetes, sendo responsável por, através de seus componentes, permitir com que possamos tomar decisões globais a respeito dos workers do mesmo, como: 
+Esse componente é responsável por gerenciar os [Nodes](./kubernetes_nodes.md) no cluster Kubernetes, sendo responsável por, através de seus componentes, permitir com que possamos tomar decisões globais a respeito dos workers do mesmo, como: 
 
 - Agendamento de Pods
 - Detecção de falhas e recriação de Pods instáveis
