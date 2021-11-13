@@ -18,4 +18,9 @@ spec:
     spec:
       containers:
         - name: "goserver"
-          image: "liverdayg/hello-golang:latest"
+          image: "liverdayg/hello-golang:v2"
+          env:
+            - name: NAME
+              value: "Vitor Medeiro"
+            - name: AGE
+              value: "24"

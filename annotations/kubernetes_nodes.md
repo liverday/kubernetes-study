@@ -20,4 +20,4 @@ Recebe um arquivo de configuração que através de vários mecanismos, garante 
 
 Cada Node é responsável por ter um Software que permite a execução de containers.
 
-Um Node Kubernetes suporta diversas ferramentas, como: [Docker](https://docs.docker.com/engine/), [containerd](https://containerd.io/docs/), [cri-o](https://cri-o.io/#what-is-cri-o) e qualquer outra implementação da [Kubernetes CRI](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md) 
+Um Node Kubernetes suporta diversas ferramentas, como: [Docker](https://docs.docker.com/engine/), [containerd](https://containerd.io/docs/), [cri-o](https://cri-o.io/#what-is-cri-o) e qualquer outra implementação da [Kubernetes CRI](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md)

@@ -15,3 +15,4 @@ E aqui está uma lista de conteúdos que eu usei para estudar o Kubernetes, todo
     - [ReplicaSets](./kubernetes_replicaset.md)
     - [Pods](./kubernetes_pods.md)
 - [Ferramentas de instalação e Uso do Kubernetes](./kubernetes_tools.md)
+- [Variáveis de Ambiente](./kubernetes_envvars.md)
